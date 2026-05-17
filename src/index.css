@@ -53,7 +53,7 @@
   }
 
   .cyber-input {
-    @apply w-full bg-transparent border-b border-steel py-3 font-mono text-sm focus:border-neon transition-all outline-none placeholder:text-steel;
+    @apply w-full bg-transparent border-b border-steel/80 py-3 font-mono text-sm focus:border-neon transition-all outline-none placeholder:text-[#e5e2e1]/30;
   }
 }
 

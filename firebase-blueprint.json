@@ -1,0 +1,43 @@
+{
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Private user profiles."
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Public product catalog."
+    }
+  },
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information and preferences.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique identifiers for the user." },
+        "displayName": { "type": "string", "description": "Public name of the user." },
+        "email": { "type": "string", "format": "email" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastLogin": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Catalog item.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "name", "price"]
+    }
+  }
+}

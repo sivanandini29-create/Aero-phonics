@@ -2,5 +2,5 @@
   "name": "AERO-PHONICS",
   "description": "High-fidelity industrial audio interfaces with an aggressive neon-technical aesthetic.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

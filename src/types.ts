@@ -14,7 +14,7 @@ export interface Product {
   };
 }
 
-export type Page = "home" | "detail" | "checkout" | "about";
+export type Page = "home" | "detail" | "checkout" | "about" | "nodes" | "login";
 
 export const PRODUCTS: Product[] = [
   {

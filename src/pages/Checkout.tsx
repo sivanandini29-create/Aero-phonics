@@ -29,11 +29,11 @@ export default function Checkout() {
         </div>
 
         <div className="space-y-6">
-          <div className="flex justify-between nav-label opacity-60">
+          <div className="flex justify-between nav-label opacity-80">
             <span>Subtotal</span>
             <span>$499.00</span>
           </div>
-          <div className="flex justify-between nav-label opacity-60">
+          <div className="flex justify-between nav-label opacity-80">
             <span>Logistics</span>
             <span className="text-neon">OFFLINE_NODAL_FREE</span>
           </div>
@@ -55,7 +55,7 @@ export default function Checkout() {
           
           <div className="space-y-8">
             <div className="space-y-2">
-              <label className="nav-label opacity-40">Operator Identity</label>
+              <label className="nav-label opacity-70 text-blue">Operator Identity</label>
               <input 
                 className="cyber-input"
                 placeholder="FULL_NAME_ID"
@@ -63,7 +63,7 @@ export default function Checkout() {
               />
             </div>
             <div className="space-y-2">
-              <label className="nav-label opacity-40">Uplink Address</label>
+              <label className="nav-label opacity-70 text-blue">Uplink Address</label>
               <input 
                 className="cyber-input"
                 placeholder="STREET, UNIT, SUITE"
@@ -72,7 +72,7 @@ export default function Checkout() {
             </div>
             <div className="grid grid-cols-2 gap-12">
               <div className="space-y-2">
-                <label className="nav-label opacity-40">Global Sector</label>
+                <label className="nav-label opacity-70 text-blue">Global Sector</label>
                 <input 
                   className="cyber-input"
                   placeholder="CITY"
@@ -80,7 +80,7 @@ export default function Checkout() {
                 />
               </div>
               <div className="space-y-2">
-                <label className="nav-label opacity-40">Routing Node</label>
+                <label className="nav-label opacity-70 text-blue">Routing Node</label>
                 <input 
                   className="cyber-input"
                   placeholder="POSTAL"
@@ -94,19 +94,19 @@ export default function Checkout() {
         {/* Step 2: Payment */}
         <section className="space-y-12">
           <div className="flex items-center gap-6">
-            <span className="text-2xl italic text-steel font-bold">02</span>
-            <h2 className="text-3xl font-bold uppercase tracking-tight opacity-40 text-blue">Credit_Cred</h2>
+            <span className="text-2xl italic text-neon font-bold">02</span>
+            <h2 className="text-3xl font-bold uppercase tracking-tight text-blue">Credit_Cred</h2>
           </div>
 
-          <div className="bg-industrial/50 p-12 hud-border border-blue/20 space-y-12 relative">
+          <div className="bg-industrial/50 p-12 hud-border border-blue/40 space-y-12 relative">
             <div className="flex justify-between items-start">
-              <CreditCard size={32} className="text-blue opacity-50" />
-              <span className="micro-label font-bold text-neon/40">Encrypted Stream Data</span>
+              <CreditCard size={32} className="text-blue" />
+              <span className="micro-label font-bold text-neon/60 bg-neon/10 px-2 py-1">Encrypted Stream Data</span>
             </div>
 
             <div className="space-y-8">
               <div className="space-y-2">
-                <label className="nav-label opacity-40">Card Cipher</label>
+                <label className="nav-label opacity-70 text-blue">Card Cipher</label>
                 <input 
                   className="cyber-input"
                   placeholder="0000 0000 0000 0000"
@@ -115,7 +115,7 @@ export default function Checkout() {
               </div>
               <div className="grid grid-cols-2 gap-12">
                 <div className="space-y-2">
-                  <label className="nav-label opacity-40">Expiry</label>
+                  <label className="nav-label opacity-70 text-blue">Expiry</label>
                   <input 
                     className="cyber-input"
                     placeholder="MM / YY"
@@ -123,7 +123,7 @@ export default function Checkout() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="nav-label opacity-40">Hash</label>
+                  <label className="nav-label opacity-70 text-blue">Hash</label>
                   <input 
                     className="cyber-input"
                     placeholder="***"
@@ -142,7 +142,7 @@ export default function Checkout() {
           <span className="text-xl">Execute Transfer</span>
           <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
         </button>
-        <p className="micro-label !opacity-30 text-center tracking-[0.3em]">
+        <p className="micro-label !opacity-60 text-center tracking-[0.3em]">
           Authorization packet required for final synchronization
         </p>
       </div>

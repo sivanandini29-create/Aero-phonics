@@ -42,14 +42,25 @@ export default function About() {
       {/* Philosophy Details */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-24 pt-24 border-t border-steel/20">
         {categories.map((item, i) => (
-          <div key={i} className="space-y-6 group">
+          <motion.div 
+            key={i} 
+            initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6 group"
+          >
             <div className="flex items-center gap-4">
               <span className="text-neon font-mono text-2xl italic">0{i+1}</span>
-              <div className="flex-grow h-[0.5px] bg-steel/20 group-hover:bg-blue transition-colors"></div>
+              <motion.div 
+                className="flex-grow h-[0.5px] bg-steel/20"
+                whileInView={{ width: '100%' }}
+                viewport={{ once: true }}
+                initial={{ width: 0 }}
+              />
             </div>
-            <h2 className="text-4xl font-bold tracking-tight h-12 uppercase text-blue">{item.title}</h2>
+            <h2 className="text-4xl font-bold tracking-tight h-12 uppercase text-blue group-hover:text-neon transition-colors">{item.title}</h2>
             <p className="text-xs opacity-50 leading-relaxed font-mono">{item.description}</p>
-          </div>
+          </motion.div>
         ))}
       </section>
 

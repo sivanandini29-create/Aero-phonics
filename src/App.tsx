@@ -4,17 +4,22 @@
  */
 
 import { useState } from 'react';
-import { ShoppingCart, User, Home, Grid, Info, ShieldCheck, ArrowRight, Zap } from 'lucide-react';
+import { ShoppingCart, User, Home, Grid, Info, ShieldCheck, ArrowRight, Zap, LogOut, Terminal, Package, LayoutDashboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PRODUCTS, type Page, type Product } from './types.ts';
 import Catalog from './pages/Catalog.tsx';
 import ProductDetail from './pages/ProductDetail.tsx';
 import Checkout from './pages/Checkout.tsx';
 import About from './pages/About.tsx';
+import Nodes from './pages/Nodes.tsx';
+import Login from './pages/Login.tsx';
+import AIAssistant from './components/AIAssistant.tsx';
+import { useAuth } from './context/AuthContext.tsx';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { user, signOut } = useAuth();
 
   const navigateToDetail = (product: Product) => {
     setSelectedProduct(product);
@@ -43,8 +48,17 @@ export default function App() {
             {['Architecture', 'Systems', 'Nodes', 'Catalog'].map(item => (
               <button 
                 key={item}
-                onClick={() => item === 'Catalog' ? navigateTo('home') : null}
-                className="hover:text-neon transition-colors"
+                onClick={() => {
+                  if (item === 'Catalog') navigateTo('home');
+                  if (item === 'Nodes') navigateTo('nodes');
+                  if (item === 'Systems') navigateTo('about');
+                }}
+                className={`transition-colors ${
+                  (item === 'Catalog' && currentPage === 'home') || 
+                  (item === 'Nodes' && currentPage === 'nodes') || 
+                  (item === 'Systems' && currentPage === 'about') 
+                  ? 'text-neon' : 'hover:text-neon'
+                }`}
               >
                 {item}
               </button>
@@ -55,9 +69,32 @@ export default function App() {
             <button className="p-2 text-neon hover:text-blue transition-colors">
               <ShoppingCart size={20} />
             </button>
-            <button className="p-2 text-neon hover:text-blue transition-colors">
-              <User size={20} />
-            </button>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <div className="hidden md:flex flex-col items-end">
+                  <span className="text-[10px] font-mono text-neon font-bold">{user.displayName}</span>
+                  <span className="text-[8px] font-mono text-blue/60 uppercase">Node_Active</span>
+                </div>
+                <div className="w-8 h-8 rounded-full border border-neon/30 overflow-hidden">
+                  <img src={user.photoURL || ''} alt="User" className="w-full h-full object-cover" />
+                </div>
+                <button 
+                  onClick={() => signOut()}
+                  className="p-2 text-blue hover:text-neon transition-colors"
+                  title="Disconnect Uplink"
+                >
+                  <LogOut size={20} />
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={() => navigateTo('login')}
+                className={`flex items-center gap-2 p-2 transition-colors group ${currentPage === 'login' ? 'text-neon' : 'text-neon hover:text-blue'}`}
+              >
+                <User size={20} />
+                <span className="nav-label text-[10px] hidden md:block">Initialize_Auth</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -86,6 +123,12 @@ export default function App() {
             )}
             {currentPage === 'about' && (
               <About />
+            )}
+            {currentPage === 'nodes' && (
+              <Nodes onNavigate={navigateTo} />
+            )}
+            {currentPage === 'login' && (
+              <Login />
             )}
           </motion.div>
         </AnimatePresence>
@@ -128,7 +171,8 @@ export default function App() {
           <span className="text-[9px] uppercase tracking-tighter font-bold font-mono">Catalog</span>
         </button>
         <button 
-          className="flex flex-col items-center gap-1 text-[#e5e2e1]/40"
+          onClick={() => navigateTo('nodes')}
+          className={`flex flex-col items-center gap-1 transition-colors ${currentPage === 'nodes' ? 'text-neon' : 'text-[#e5e2e1]/40'}`}
         >
           <Grid size={18} />
           <span className="text-[9px] uppercase tracking-tighter font-bold font-mono">Nodes</span>
@@ -141,6 +185,9 @@ export default function App() {
           <span className="text-[9px] uppercase tracking-tighter font-bold font-mono">About</span>
         </button>
       </nav>
+
+      {/* AI Assistant */}
+      <AIAssistant />
     </div>
   );
 }
