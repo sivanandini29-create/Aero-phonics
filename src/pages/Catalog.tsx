@@ -208,8 +208,20 @@ export default function Catalog({ onProductSelect }: CatalogProps) {
                 
                 <div className="space-y-4">
                   <div className="flex justify-between items-baseline">
-                    <h3 className="text-2xl font-bold uppercase tracking-tight group-hover:text-neon transition-colors">{product.name}</h3>
-                    <span className="font-mono text-sm font-bold text-blue">${product.price.toFixed(2)}</span>
+                    <div className="flex items-center gap-3">
+                      <h3 className="text-2xl font-bold uppercase tracking-tight group-hover:text-neon transition-colors truncate max-w-[200px] sm:max-w-xs">{product.name}</h3>
+                      {product.stockStatus && (
+                        <div className="flex items-center gap-1.5 bg-black/40 px-2 py-0.5 border border-steel/20 shrink-0">
+                          <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+                            product.stockStatus === 'High' ? 'bg-neon shadow-[0_0_5px_theme(colors.neon)]' : 
+                            product.stockStatus === 'Medium' ? 'bg-blue shadow-[0_0_5px_theme(colors.blue)]' : 
+                            'bg-red-500 shadow-[0_0_5px_theme(colors.red.500)]'
+                          }`} />
+                          <span className="text-[8px] font-mono uppercase tracking-wider text-steel">{product.stockStatus}</span>
+                        </div>
+                      )}
+                    </div>
+                    <span className="font-mono text-sm font-bold text-blue shrink-0">${product.price.toFixed(2)}</span>
                   </div>
                   
                   <p className="text-xs opacity-50 line-clamp-2 leading-relaxed font-sans">

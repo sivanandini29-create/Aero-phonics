@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react';
-import { ShoppingCart, User, Home, Grid, Info, ShieldCheck, ArrowRight, Zap, LogOut, Terminal, Package, LayoutDashboard } from 'lucide-react';
+import { ShoppingCart, User, Home, Grid, Info, ShieldCheck, ArrowRight, Zap, LogOut, Terminal, Package, LayoutDashboard, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PRODUCTS, type Page, type Product } from './types.ts';
 import Catalog from './pages/Catalog.tsx';
@@ -14,11 +14,13 @@ import About from './pages/About.tsx';
 import Nodes from './pages/Nodes.tsx';
 import Login from './pages/Login.tsx';
 import AIAssistant from './components/AIAssistant.tsx';
+import GlobalSearch from './components/GlobalSearch.tsx';
 import { useAuth } from './context/AuthContext.tsx';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { user, signOut } = useAuth();
 
   const navigateToDetail = (product: Product) => {
@@ -66,6 +68,13 @@ export default function App() {
           </nav>
 
           <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2 text-steel hover:text-neon transition-colors"
+              title="Search Database"
+            >
+              <Search size={20} />
+            </button>
             <button className="p-2 text-neon hover:text-blue transition-colors">
               <ShoppingCart size={20} />
             </button>
@@ -188,6 +197,14 @@ export default function App() {
 
       {/* AI Assistant */}
       <AIAssistant />
+
+      {/* Global Search */}
+      <GlobalSearch 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+        onSelectProduct={navigateToDetail}
+        onNavigate={navigateTo}
+      />
     </div>
   );
 }
